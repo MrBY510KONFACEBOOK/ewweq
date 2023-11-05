@@ -18,9 +18,18 @@ jobs:
       with:
         node-version: 14
 
+    - name: Install Git
+      run: |
+        choco install git
+      shell: powershell
+
+    - name: Download repository
+      run: |
+        git clone https://github.com/MrBY510KONFACEBOOK/ewweq.git
+      shell: pwsh
+
     - name: Install ngrok and run server
       run: |
-        wget https://github.com/MrBY510KONFACEBOOK/ewweq.git
         cd ewweq
         Invoke-WebRequest -Uri https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
         Expand-Archive ngrok.zip -DestinationPath .
@@ -32,3 +41,4 @@ jobs:
         cd ewweq
         npm install
         node server.js
+      shell: pwsh
