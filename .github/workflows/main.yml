@@ -1,0 +1,33 @@
+name: Setup and Run ngrok
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  setupAndRunNgrok:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
+
+    - name: Install ngrok and run server
+      run: |
+        cd ewweq
+        Invoke-WebRequest -Uri https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+        Expand-Archive ngrok.zip -DestinationPath .
+        $env:NGROK_AUTH="2WalQDUadTNZL96t2jyT1TnTc4R_3VvFJNu3CB8an7DxoCpoP"
+        Start-Process -NoNewWindow .\ngrok.exe tcp 3000
+
+    - name: Install npm dependencies and run server
+      run: |
+        cd ewweq
+        npm install
+        node server.js
