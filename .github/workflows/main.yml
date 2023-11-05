@@ -28,6 +28,7 @@ jobs:
         Invoke-WebRequest -Uri https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
         Expand-Archive ngrok.zip -DestinationPath .
         $env:NGROK_AUTH="2WalQDUadTNZL96t2jyT1TnTc4R_3VvFJNu3CB8an7DxoCpoP"
+        Start-Process -NoNewWindow .\ngrok.exe -ArgumentList 'authtoken', $env:NGROK_AUTH
         Start-Process -NoNewWindow .\ngrok.exe -ArgumentList 'tcp', '3000'
       shell: pwsh
 
