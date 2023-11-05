@@ -20,20 +20,20 @@ jobs:
 
     - name: Download repository
       run: git clone https://github.com/MrBY510KONFACEBOOK/ewweq.git
-      shell: cmd
+      shell: pwsh
 
     - name: Install ngrok and run server
       run: |
         cd ewweq
         Invoke-WebRequest -Uri https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
         Expand-Archive ngrok.zip -DestinationPath .
-        set NGROK_AUTH=2WalQDUadTNZL96t2jyT1TnTc4R_3VvFJNu3CB8an7DxoCpoP
-        start /B ngrok.exe tcp 3000
-      shell: cmd
+        $env:NGROK_AUTH="2WalQDUadTNZL96t2jyT1TnTc4R_3VvFJNu3CB8an7DxoCpoP"
+        Start-Process -NoNewWindow .\ngrok.exe tcp 3000
+      shell: pwsh
 
     - name: Install npm dependencies and run server
       run: |
         cd ewweq
         npm install
         node server.js
-      shell: cmd
+      shell: pwsh
