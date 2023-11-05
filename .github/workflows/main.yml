@@ -18,10 +18,6 @@ jobs:
       with:
         node-version: 14
 
-    - name: Install Git
-      run: choco install git
-      shell: cmd
-
     - name: Download repository
       run: git clone https://github.com/MrBY510KONFACEBOOK/ewweq.git
       shell: cmd
